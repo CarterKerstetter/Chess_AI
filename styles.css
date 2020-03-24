@@ -9,12 +9,22 @@
 .chess_square {
     height: 11.25vw;
     width:  11.25vw;
+    display: inline-block;
 }
 
-.row_indicator {
+.row_indicator, .col_indicator {
     font-size:  3vw;
     position:   absolute;
     font-family: Arial;
     font-weight: bold;
+    color: white;
+    mix-blend-mode: difference;
+}
+
+.row_indicator {
     left:       0.5vw;
+}
+
+.col_indicator {
+    top:       0.5vw;
 }
