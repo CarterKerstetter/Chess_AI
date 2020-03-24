@@ -1,0 +1,11 @@
+#chess_board {
+    height: 800px;
+    width: 800px;
+    border-style: solid;
+    font-size:  0px;
+}
+
+.chess_square {
+    height: 100px;
+    width:  100px;
+}
