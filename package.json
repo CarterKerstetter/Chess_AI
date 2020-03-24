@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Chess game with different AI options",
   "main": "main.js",
-  "type": "module",
   "scripts": {
     "start": "electron ."
   },

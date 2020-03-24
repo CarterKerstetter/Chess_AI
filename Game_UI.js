@@ -1,5 +1,6 @@
 class Game_UI{
   constructor() {
+    this.setupBoard()
   }
 
   setupBoard() {
