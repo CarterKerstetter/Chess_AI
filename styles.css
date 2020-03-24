@@ -1,11 +1,20 @@
 #chess_board {
-    height: 800px;
-    width: 800px;
+    height: 90vw;
+    width: 90vw;
     border-style: solid;
+    position:   relative;
     font-size:  0px;
 }
 
 .chess_square {
-    height: 100px;
-    width:  100px;
+    height: 11.25vw;
+    width:  11.25vw;
+}
+
+.row_indicator {
+    font-size:  3vw;
+    position:   absolute;
+    font-family: Arial;
+    font-weight: bold;
+    left:       0.5vw;
 }

@@ -5,13 +5,13 @@ const path = require('path')
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1200,
+    width: 800,
     height: 1200,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  mainWindow.setMenu(null)
   mainWindow.webContents.openDevTools()
 
   // and load the Chess_GUI.html of the app.
