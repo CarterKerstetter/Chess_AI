@@ -6,7 +6,7 @@
     font-size:  0px;
 }
 
-.chess_square {
+.primary_chess_square, .secondary_chess_square {
     height: 11.25vw;
     width:  11.25vw;
     display: inline-block;

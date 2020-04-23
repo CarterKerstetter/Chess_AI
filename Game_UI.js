@@ -1,21 +1,22 @@
-class Game_UI{
-  FIRST_COLOR = 'white'
-  SECOND_COLOR = 'black'
+import { Theme } from './Theme.js'
+
+class Game_UI {
   BOARD_SIZE = 8
 
   constructor() {
-    this.setupBoard()
+    this.setupWindow()
   }
 
   createSquare( row, col ) {
     let square = document.createElement( 'div' )
-    square.classList.add( 'chess_square' )
     let color = ( row + col ) % 2
     if(color == 0) {
-      square.style.background = this.FIRST_COLOR
+      square.classList.add( 'primary_chess_square' )
+      //square.style.background = this.THEME.PRIMARY_COLOR
     }
     else {
-      square.style.background = this.SECOND_COLOR
+      square.classList.add( 'secondary_chess_square' )
+      //square.style.background = this.THEME.SECONDARY_COLOR
     }
     return square
   }
@@ -34,6 +35,19 @@ class Game_UI{
     col_indicator.classList.add( 'col_indicator' )
     col_indicator.style.left = ( col * 90/8 + 7.75 ).toString() + 'vw'
     return col_indicator
+  }
+
+  setTheme() {
+    let theme_name = document.getElementById( 'board_style' ).value
+    let theme = new Theme( theme_name )
+    let primary_chess_squares = document.getElementsByClassName('primary_chess_square');
+    let secondary_chess_squares = document.getElementsByClassName('secondary_chess_square');
+    for(let index = 0; index < primary_chess_squares.length; index++) {
+      primary_chess_squares[index].style.background = theme.PRIMARY_COLOR
+    }
+    for(let index = 0; index < secondary_chess_squares.length; index++) {
+      secondary_chess_squares[index].style.background = theme.SECONDARY_COLOR
+    }
   }
 
   setupBoard() {
@@ -55,6 +69,25 @@ class Game_UI{
       board.appendChild( row_indicator )
     }
   }
+
+  setupWindow() {
+    // set up selector for board styles
+    let selector = document.getElementById( 'board_style' )
+    let theme_types = Theme.getThemeNames()
+    for (let index = 0 ; index < theme_types.length ; index++ ) {
+      let theme_type = theme_types [ index ]
+      let option = document.createElement( 'option' )
+      option.appendChild( document.createTextNode( theme_type ) )
+      option.value = theme_type
+      selector.appendChild(option)
+    }
+    // create the board
+    this.setupBoard()
+    // set up the default board theme
+    this.setTheme( new Theme() )
+    // set up selector to be able to change the theme
+    selector.addEventListener('change', this.setTheme)
+  }
 }
 
-export {Game_UI}
+export { Game_UI }
