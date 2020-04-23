@@ -1,4 +1,4 @@
-import { Game_UI } from './Game_UI.js'
+import { Chess_View } from './view/Chess_View.js'
 
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
@@ -7,4 +7,4 @@ import { Game_UI } from './Game_UI.js'
 // selectively enable features needed in the rendering
 // process.
 
-var UI_Manager = new Game_UI();
+var UI_Manager = new Chess_View();

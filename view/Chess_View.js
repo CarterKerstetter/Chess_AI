@@ -1,7 +1,8 @@
 import { Theme } from './Theme.js'
 
-class Game_UI {
+class Chess_View {
   BOARD_SIZE = 8
+  theme
 
   constructor() {
     this.setupWindow()
@@ -39,14 +40,14 @@ class Game_UI {
 
   setTheme() {
     let theme_name = document.getElementById( 'board_style' ).value
-    let theme = new Theme( theme_name )
+    this.theme = new Theme( theme_name )
     let primary_chess_squares = document.getElementsByClassName('primary_chess_square');
     let secondary_chess_squares = document.getElementsByClassName('secondary_chess_square');
     for(let index = 0; index < primary_chess_squares.length; index++) {
-      primary_chess_squares[index].style.background = theme.PRIMARY_COLOR
+      primary_chess_squares[index].style.background = this.theme.PRIMARY_COLOR
     }
     for(let index = 0; index < secondary_chess_squares.length; index++) {
-      secondary_chess_squares[index].style.background = theme.SECONDARY_COLOR
+      secondary_chess_squares[index].style.background = this.theme.SECONDARY_COLOR
     }
   }
 
@@ -90,4 +91,4 @@ class Game_UI {
   }
 }
 
-export { Game_UI }
+export { Chess_View }
