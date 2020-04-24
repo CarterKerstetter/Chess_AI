@@ -1,6 +1,7 @@
+// can't use black or the chess pieces are hard to see
 const THEMES = {
     DEFAULT:    {
-      PRIMARY_COLOR:    'black',
+      PRIMARY_COLOR:    '#8b4513',
       SECONDARY_COLOR:  'white'
     },
     VAPORWAVE:  {
@@ -9,7 +10,7 @@ const THEMES = {
     },
     HALLOWEEN:  {
       PRIMARY_COLOR:    'orange',
-      SECONDARY_COLOR:  'black'
+      SECONDARY_COLOR:  'grey'
     }
 }
 

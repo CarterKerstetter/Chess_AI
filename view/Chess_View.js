@@ -3,9 +3,40 @@ import { Theme } from './Theme.js'
 class Chess_View {
   BOARD_SIZE = 8
   theme
+  controller
 
-  constructor() {
+  constructor( controller ) {
+    this.addPiece = this.addPiece.bind(this);
+    this.removePiece = this.removePiece.bind(this);
+    this.controller = controller
+  }
+
+  run() {
     this.setupWindow()
+    this.setupController()
+    this.controller.startGame()
+    // this.addPiece( 'test', 'view/res/chess_pieces/black_bishop.png',2 , 4 )
+    // this.addPiece( 'test2', 'view/res/chess_pieces/white_bishop.png',2 , 5 )
+    // this.removePiece( 'test' )
+
+  }
+
+  addPiece( id, img_src, row, col ) {
+    let square_id = this.createSquareId(row, col)
+    let square = document.getElementById( square_id )
+    let piece = document.createElement( 'img' )
+    piece.setAttribute('id', id)
+    piece.setAttribute('src', img_src)
+    piece.classList.add( 'chess_piece' )
+    square.appendChild( piece )
+  }
+
+  removePiece( id ) {
+    document.getElementById( id ).remove()
+  }
+
+  createSquareId(row, col) {
+    return 'chess_square_'.concat( row.toString(), '_', col.toString() ) 
   }
 
   createSquare( row, col ) {
@@ -13,12 +44,12 @@ class Chess_View {
     let color = ( row + col ) % 2
     if(color == 0) {
       square.classList.add( 'primary_chess_square' )
-      //square.style.background = this.THEME.PRIMARY_COLOR
     }
     else {
       square.classList.add( 'secondary_chess_square' )
-      //square.style.background = this.THEME.SECONDARY_COLOR
     }
+    let id = this.createSquareId(row, col)
+    square.setAttribute('id', id)
     return square
   }
 
@@ -78,16 +109,22 @@ class Chess_View {
     for (let index = 0 ; index < theme_types.length ; index++ ) {
       let theme_type = theme_types [ index ]
       let option = document.createElement( 'option' )
-      option.appendChild( document.createTextNode( theme_type ) )
+      let theme_type_text = theme_type.charAt( 0 ).toUpperCase() + theme_type.slice( 1 ).toLowerCase()
+      option.appendChild( document.createTextNode( theme_type_text ) )
       option.value = theme_type
       selector.appendChild(option)
     }
     // create the board
     this.setupBoard()
     // set up the default board theme
-    this.setTheme( new Theme() )
+    this.setTheme()
     // set up selector to be able to change the theme
     selector.addEventListener('change', this.setTheme)
+  }
+
+  setupController() {
+    this.controller.addListener('add_piece', this.addPiece)
+    this.controller.addListener('remove_piece', this.removePiece)
   }
 }
 

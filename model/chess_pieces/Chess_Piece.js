@@ -6,7 +6,7 @@ class Chess_Piece {
     piece_type
 
     constructor(piece_type, piece_number, side) {
-        this.img_src = side.concat('_', piece_type, '.png')
+        this.img_src = 'view/res/chess_pieces/'.concat(side, '_', piece_type, '.png')
         this.piece_number = piece_number
         this.side = side
         this.id = side.concat('_', piece_type, '_', piece_number.toString())
