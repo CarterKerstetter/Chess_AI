@@ -1,4 +1,4 @@
-import { Position } from './Position.js';
+import { Position } from './chess_pieces/motion/Position.js';
 
 const EventEmitter = require('events').EventEmitter
 
@@ -24,6 +24,7 @@ class Chess_Board extends EventEmitter {
     movePiece( move ) {
         let moving_piece = this.removePiece( move.start_position )
         this.removePiece( move.end_position )
+        moving_piece.has_moved = true
         this.addPiece( moving_piece, move.end_position )
     }
 

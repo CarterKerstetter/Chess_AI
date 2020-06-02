@@ -41,7 +41,7 @@ class Chess_Controller extends EventEmitter {
     else {
       // remove previous highlighting
       this.emit( 'remove_highlight_from_square', this.first_row, this.first_col )
-      if( this.model.canMove( this.first_row, this.first_col, row, col ) ) {
+      if( this.model.isValidMove( this.first_row, this.first_col, row, col ) ) {
         this.model.movePiece( this.first_row, this.first_col, row, col )
       }
       this.first_row = undefined

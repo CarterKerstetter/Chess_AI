@@ -4,6 +4,7 @@ class Chess_Piece {
     side
     id
     piece_type
+    has_moved
 
     constructor(piece_type, piece_number, side) {
         this.img_src = 'view/res/chess_pieces/'.concat(side, '_', piece_type, '.png')
@@ -11,6 +12,15 @@ class Chess_Piece {
         this.side = side
         this.id = side.concat('_', piece_type, '_', piece_number.toString())
         this.piece_type = piece_type
+        this.has_moved = false
+    }
+
+    isValidMove( move ) {
+        return false
+    }
+
+    set has_moved( has_moved ) {
+        this.has_moved = has_moved
     }
 
     get img_src() {

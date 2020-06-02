@@ -1,17 +1,19 @@
-import { Chess_Board } from './Chess_Board.js';
+import { Chess_Board } from './Chess_Board.js'
 import { Bishop } from './chess_pieces/Bishop.js'
 import { King } from './chess_pieces/King.js'
 import { Knight } from './chess_pieces/Knight.js'
 import { Pawn } from './chess_pieces/Pawn.js'
 import { Queen } from './chess_pieces/Queen.js'
 import { Rook } from './chess_pieces/Rook.js'
-import { Position } from './Position.js'
-import { Move } from './Move.js';
+import { Position } from './chess_pieces/motion/Position.js'
+import { Move } from './chess_pieces/motion/Move.js'
+import { Ruleset } from './chess_rules/Ruleset.js'
 
 const EventEmitter = require('events').EventEmitter
 
 class Chess_Model extends EventEmitter {
     chess_board = new Chess_Board()
+    ruleset = new Ruleset()
     turn
     total = 0
 
@@ -24,14 +26,20 @@ class Chess_Model extends EventEmitter {
     }
 
     movePiece( first_x, first_y, second_x, second_y ) {
+        if( this.isValidMove( first_x, first_y, second_x, second_y ) ) {
+            let start_position = new Position( first_x, first_y )
+            let end_position = new Position( second_x, second_y )
+            let move = new Move( start_position, end_position )
+            this.chess_board.movePiece( move )
+            this.swapTurn()
+        }
+    }
+
+    isValidMove( first_x, first_y, second_x, second_y ) {
         let start_position = new Position( first_x, first_y )
         let end_position = new Position( second_x, second_y )
         let move = new Move( start_position, end_position )
-        this.chess_board.movePiece( move )
-    }
-
-    canMove( first_x, first_y, second_x, second_y ) {
-        return true
+        return this.ruleset.isValid( this.chess_board, this.turn, move )
     }
 
     getPiece( row, col ) {
