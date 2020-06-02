@@ -16,7 +16,7 @@ class AI_Controller {
 
     static getAiNames() {
         return Object.keys(AI_TYPES)
-      }
+    }
 
     makeMove( board, side ) {
         this.ai.makeMove( board, side )

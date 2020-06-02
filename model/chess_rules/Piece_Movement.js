@@ -3,6 +3,7 @@ import { Rule } from './Rule.js'
 class Piece_Movement extends Rule {
     constructor() {
         super()
+        this.description = 'Piece_Movement: Check that the movement of the piece is valid and that nothing is in the way.'
     }
 
     // check a piece exists, check if the move is in the correct trajectory, and nothing is in the way

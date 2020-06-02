@@ -8,6 +8,7 @@ class Chess_Controller extends EventEmitter {
   ai_side
   first_row = undefined
   first_col = undefined
+  highlighted_positions = []
 
   constructor( model ) {
       super()
@@ -31,21 +32,32 @@ class Chess_Controller extends EventEmitter {
     // selecting a piece to move
     if( typeof this.first_row === "undefined" ) {
       let piece = this.model.getPiece( row, col )
-      if( piece && ( piece.side == side ) ) {
+      //if( piece && ( piece.side == side ) && ( side == this.model.turn ) ) {
+      if( piece && ( piece.side == this.model.turn ) ) {
         this.first_row = row
         this.first_col = col
         this.emit( 'highlight_square', row, col )
+        this.highlighted_positions = this.model.getPossibleEndPositions( row, col )
+        for( let index = 0 ; index < this.highlighted_positions.length ; index++ ) {
+          let end_position = this.highlighted_positions[ index ]
+          this.emit( 'highlight_square', end_position.row, end_position.col )
+        }
       }
     }
     // attempt to move piece from previously specified location
     else {
       // remove previous highlighting
       this.emit( 'remove_highlight_from_square', this.first_row, this.first_col )
-      if( this.model.isValidMove( this.first_row, this.first_col, row, col ) ) {
+      for( let index = 0 ; index < this.highlighted_positions.length ; index++ ) {
+        let end_position = this.highlighted_positions[ index ]
+        this.emit( 'remove_highlight_from_square', end_position.row, end_position.col )
+      }
+      if( this.model.isValidMove( this.first_row, this.first_col, row, col, true ) ) {
         this.model.movePiece( this.first_row, this.first_col, row, col )
       }
       this.first_row = undefined
       this.second_row = undefined
+      this.highlighted_positions = undefined
     }
   }
 

@@ -25,7 +25,7 @@ class Bishop extends Chess_Piece {
             }
             return position_list
         }
-        return False
+        return false
     }
 }
 

@@ -3,6 +3,7 @@ import { Rule } from './Rule.js'
 class Correct_Turn extends Rule {
     constructor() {
         super()
+        this.description = 'Correct_Turn: Check whether the piece moving and the current turn are the same.'
     }
 
     // check that it is the correct turn

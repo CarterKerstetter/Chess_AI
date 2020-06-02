@@ -25,8 +25,21 @@ class Chess_Model extends EventEmitter {
         this.chess_board.addListener('remove_piece', this.removePiece)
     }
 
+    getPossibleEndPositions( row, col ) {
+        let position_list = []
+        for( let end_row = 0 ; end_row < 8 ; end_row++) {
+            for( let end_col = 0 ; end_col < 8 ; end_col++) {
+                if( this.isValidMove( row, col, end_row, end_col, false ) )  {
+                    let position = new Position( end_row, end_col )
+                    position_list.push( position )
+                }
+            }
+        }
+        return position_list
+    }
+
     movePiece( first_x, first_y, second_x, second_y ) {
-        if( this.isValidMove( first_x, first_y, second_x, second_y ) ) {
+        if( this.isValidMove( first_x, first_y, second_x, second_y, false ) ) {
             let start_position = new Position( first_x, first_y )
             let end_position = new Position( second_x, second_y )
             let move = new Move( start_position, end_position )
@@ -35,7 +48,7 @@ class Chess_Model extends EventEmitter {
         }
     }
 
-    isValidMove( first_x, first_y, second_x, second_y ) {
+    isValidMove( first_x, first_y, second_x, second_y, description ) {
         let start_position = new Position( first_x, first_y )
         let end_position = new Position( second_x, second_y )
         let move = new Move( start_position, end_position )
@@ -47,12 +60,16 @@ class Chess_Model extends EventEmitter {
         return this.chess_board.getPiece( position )
     }
 
+    get turn() {
+        return this.turn
+    }
+
     swapTurn() {
         if( this.turn == 'white' ) {
-            this.turn == 'black'
+            this.turn = 'black'
         }
         else {
-            this.turn == 'white'
+            this.turn = 'white'
         }
     }
 

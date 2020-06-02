@@ -3,6 +3,7 @@ import { Rule } from './Rule.js'
 class No_Friendly_Fire extends Rule {
     constructor() {
         super()
+        this.description = 'No_Friendly_Fire: Check if the piece being taken is an ally or not.'
     }
 
     // check that last square landed on is empty or an enemy
