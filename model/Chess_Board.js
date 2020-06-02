@@ -21,6 +21,12 @@ class Chess_Board extends EventEmitter {
         }
     }
 
+    movePiece( move ) {
+        let moving_piece = this.removePiece( move.start_position )
+        this.removePiece( move.end_position )
+        this.addPiece( moving_piece, move.end_position )
+    }
+
     addPiece( chess_piece, position ) {
         let index = this.convertPositionTo1D( position )
         this.board[ index ] = chess_piece
@@ -28,10 +34,13 @@ class Chess_Board extends EventEmitter {
     }
 
     removePiece( position ) {
-        index = this.convertPositionTo1D( position )
+        let index = this.convertPositionTo1D( position )
         let chess_piece = this.board[ index ]
         this.board[ index ] = false
-        this.emit( 'remove_piece', chess_piece, position )
+        if( chess_piece ) {
+            this.emit( 'remove_piece', chess_piece, position )
+        }
+        return chess_piece
     }
 
     getPiece( position ) {

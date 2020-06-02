@@ -6,6 +6,7 @@ import { Pawn } from './chess_pieces/Pawn.js'
 import { Queen } from './chess_pieces/Queen.js'
 import { Rook } from './chess_pieces/Rook.js'
 import { Position } from './Position.js'
+import { Move } from './Move.js';
 
 const EventEmitter = require('events').EventEmitter
 
@@ -22,7 +23,16 @@ class Chess_Model extends EventEmitter {
         this.chess_board.addListener('remove_piece', this.removePiece)
     }
 
-    //movePiece( first_x, first_y, second_x, second_y )
+    movePiece( first_x, first_y, second_x, second_y ) {
+        let start_position = new Position( first_x, first_y )
+        let end_position = new Position( second_x, second_y )
+        let move = new Move( start_position, end_position )
+        this.chess_board.movePiece( move )
+    }
+
+    canMove( first_x, first_y, second_x, second_y ) {
+        return true
+    }
 
     getPiece( row, col ) {
         let position = new Position( row, col )

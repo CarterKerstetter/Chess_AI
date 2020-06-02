@@ -6,8 +6,8 @@ class Chess_Controller extends EventEmitter {
   ai
   human_side
   ai_side
-  first_row_of_move = undefined
-  first_col_of_move = undefined
+  first_row = undefined
+  first_col = undefined
 
   constructor( model ) {
       super()
@@ -29,17 +29,23 @@ class Chess_Controller extends EventEmitter {
 
   selectSquare( row, col, side ) {
     // selecting a piece to move
-    if( typeof this.first_row_of_move === "undefined" ) {
+    if( typeof this.first_row === "undefined" ) {
       let piece = this.model.getPiece( row, col )
       if( piece && ( piece.side == side ) ) {
-        this.first_row_of_move = row
-        this.first_col_of_move = col
+        this.first_row = row
+        this.first_col = col
         this.emit( 'highlight_square', row, col )
       }
     }
     // attempt to move piece from previously specified location
     else {
-      return
+      // remove previous highlighting
+      this.emit( 'remove_highlight_from_square', this.first_row, this.first_col )
+      if( this.model.canMove( this.first_row, this.first_col, row, col ) ) {
+        this.model.movePiece( this.first_row, this.first_col, row, col )
+      }
+      this.first_row = undefined
+      this.second_row = undefined
     }
   }
 

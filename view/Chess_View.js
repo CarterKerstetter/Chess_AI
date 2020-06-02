@@ -12,6 +12,7 @@ class Chess_View {
     this.removePiece = this.removePiece.bind(this)
     this.selectSquare = this.selectSquare.bind(this)
     this.highlightSquare = this.highlightSquare.bind(this)
+    this.removeHighlightFromSquare = this.removeHighlightFromSquare.bind(this)
     this.controller = controller
   }
 
@@ -66,6 +67,12 @@ class Chess_View {
     let square_id = this.createSquareId(row, col)
     let square = document.getElementById( square_id )
     square.classList.add('highlighted_chess_square')
+  }
+
+  removeHighlightFromSquare( row, col ) {
+    let square_id = this.createSquareId(row, col)
+    let square = document.getElementById( square_id )
+    square.classList.remove('highlighted_chess_square')
   }
 
   createSquare( row, col ) {
@@ -185,6 +192,7 @@ class Chess_View {
     this.controller.addListener( 'add_piece', this.addPiece )
     this.controller.addListener( 'remove_piece', this.removePiece )
     this.controller.addListener( 'highlight_square', this.highlightSquare )
+    this.controller.addListener( 'remove_highlight_from_square', this.removeHighlightFromSquare )
   }
 }
 
