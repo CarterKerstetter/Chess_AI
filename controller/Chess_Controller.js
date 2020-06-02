@@ -1,18 +1,53 @@
 const EventEmitter = require('events').EventEmitter
+import { AI_Controller } from './chess_ai/AI_Controller.js';
 
 class Chess_Controller extends EventEmitter {
   model
+  ai
+  human_side
+  ai_side
+  first_row_of_move = undefined
+  first_col_of_move = undefined
 
   constructor( model ) {
       super()
-      this.addPiece = this.addPiece.bind(this);
-      this.removePiece = this.removePiece.bind(this);
+      this.addPiece = this.addPiece.bind(this)
+      this.removePiece = this.removePiece.bind(this)
+      this.selectSquare = this.selectSquare.bind(this)
       this.model = model
+      this.ai = new AI_Controller()
       this.setupModel()
+  }
+
+  get AiNames() {
+    return AI_Controller.getAiNames()
+  }
+
+  setAi( type ) {
+    this.ai.setAi( type )
+  }
+
+  selectSquare( row, col, side ) {
+    // selecting a piece to move
+    if( typeof this.first_row_of_move === "undefined" ) {
+      let piece = this.model.getPiece( row, col )
+      if( piece && ( piece.side == side ) ) {
+        this.first_row_of_move = row
+        this.first_col_of_move = col
+        this.emit( 'highlight_square', row, col )
+      }
+    }
+    // attempt to move piece from previously specified location
+    else {
+      return
+    }
   }
 
   startGame() {
     this.model.resetGame()
+    this.ai_side = 'black'
+    this.human_side = 'white'
+    return this.human_side
   }
 
   addPiece( chess_piece, position ) {

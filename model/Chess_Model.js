@@ -16,10 +16,17 @@ class Chess_Model extends EventEmitter {
 
     constructor() {
         super()
-        this.addPiece = this.addPiece.bind(this);
-        this.removePiece = this.removePiece.bind(this);
+        this.addPiece = this.addPiece.bind( this );
+        this.removePiece = this.removePiece.bind( this );
         this.chess_board.addListener('add_piece', this.addPiece)
         this.chess_board.addListener('remove_piece', this.removePiece)
+    }
+
+    //movePiece( first_x, first_y, second_x, second_y )
+
+    getPiece( row, col ) {
+        let position = new Position( row, col )
+        return this.chess_board.getPiece( position )
     }
 
     swapTurn() {

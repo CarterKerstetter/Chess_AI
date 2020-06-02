@@ -9,6 +9,7 @@
 .chess_piece {
     height: 11.25vw;
     width:  11.25vw;
+    pointer-events: none;
 }
 
 .primary_chess_square, .secondary_chess_square {
@@ -17,8 +18,12 @@
     display: inline-block;
 }
 
+.highlighted_chess_square {
+   background-color:    blue !important; 
+}
+
 .row_indicator, .col_indicator {
-    font-size:  3vw;
+    font-size:  2vw;
     position:   absolute;
     font-family: Arial;
     font-weight: bold;

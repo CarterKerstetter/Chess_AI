@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "author": "Carter and Reed",
+  "author": "Carter",
   "devDependencies": {
     "electron": "^8.1.1"
   },
