@@ -7,7 +7,7 @@ class Piece_Movement extends Rule {
     }
 
     // check a piece exists, check if the move is in the correct trajectory, and nothing is in the way
-    isValid( board, turn, move ) {
+    isValid( board, turn, move, previous_move ) {
         let moving_piece = board.getPiece( move.start_position )
         // there is no piece at the start position
         if( !moving_piece ) {

@@ -7,7 +7,7 @@ class Must_Move extends Rule {
     }
 
     // check that the start and end position are not identical
-    isValid( board, turn, move ) {
+    isValid( board, turn, move, previous_move ) {
         if( move.start_position == move.end_position ) {
             return false
         }

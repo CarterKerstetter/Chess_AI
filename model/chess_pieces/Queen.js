@@ -1,5 +1,4 @@
 import { Chess_Piece } from './Chess_Piece.js'
-import { Position } from './motion/Position.js'
 
 class Queen extends Chess_Piece {
     constructor(piece_number, side) {
@@ -18,7 +17,10 @@ class Queen extends Chess_Piece {
             let position_list = []
             for( let step_num = 0 ; step_num <= Math.abs( col_difference ) ; step_num++ ) {
                 let col = initial_col + step_num * col_step
-                let position = new Position( initial_row, col )
+                let position = {
+                    row:    initial_row,
+                    col:    col
+                }
                 position_list.push( position )
             }
             return position_list
@@ -29,7 +31,10 @@ class Queen extends Chess_Piece {
             let position_list = []
             for( let step_num = 0 ; step_num <= Math.abs( row_difference ) ; step_num++ ) {
                 let row = initial_row + step_num * row_step
-                let position = new Position( row, initial_col )
+                let position = {
+                    row:    row,
+                    col:    initial_col
+                }
                 position_list.push( position )
             }
             return position_list
@@ -43,7 +48,10 @@ class Queen extends Chess_Piece {
             for( let step_num = 0 ; step_num <= Math.abs( row_difference ) ; step_num++ ) {
                 let row = initial_row + step_num * row_step
                 let col = initial_col + step_num * col_step
-                let position = new Position( row, col )
+                let position = {
+                    row:    row,
+                    col:    col
+                }
                 position_list.push( position )
             }
             return position_list

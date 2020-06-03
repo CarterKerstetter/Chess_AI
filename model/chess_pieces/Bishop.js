@@ -1,5 +1,4 @@
 import { Chess_Piece } from './Chess_Piece.js'
-import { Position } from './motion/Position.js'
 
 class Bishop extends Chess_Piece {
     constructor( piece_number, side ) {
@@ -20,7 +19,10 @@ class Bishop extends Chess_Piece {
             for( let step_num = 0 ; step_num <= Math.abs( row_difference ) ; step_num++ ) {
                 let row = initial_row + step_num * row_step
                 let col = initial_col + step_num * col_step
-                let position = new Position( row, col )
+                let position = {
+                    row:    row,
+                    col:    col
+                }
                 position_list.push( position )
             }
             return position_list

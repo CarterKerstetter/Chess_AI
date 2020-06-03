@@ -7,7 +7,7 @@ class Correct_Turn extends Rule {
     }
 
     // check that it is the correct turn
-    isValid( board, turn, move ) {
+    isValid( board, turn, move, previous_move ) {
         let moving_piece = board.getPiece( move.start_position )
         // there is no piece at the start position
         if( !moving_piece ) {

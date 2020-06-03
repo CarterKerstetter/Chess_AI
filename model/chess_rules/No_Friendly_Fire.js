@@ -7,7 +7,7 @@ class No_Friendly_Fire extends Rule {
     }
 
     // check that last square landed on is empty or an enemy
-    isValid( board, turn, move ) {
+    isValid( board, turn, move, previous_move ) {
         let moving_piece = board.getPiece( move.start_position )
         // there is no piece at the start position
         if( !moving_piece ) {

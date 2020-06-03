@@ -1,5 +1,3 @@
-import { Position } from './chess_pieces/motion/Position.js';
-
 const EventEmitter = require('events').EventEmitter
 
 class Chess_Board extends EventEmitter {
@@ -19,6 +17,10 @@ class Chess_Board extends EventEmitter {
                 this.emit( 'remove_piece', chess_piece, position )
             }
         }
+    }
+
+    get BOARD_SIZE() {
+        return this.BOARD_SIZE
     }
 
     movePiece( move ) {
@@ -55,7 +57,10 @@ class Chess_Board extends EventEmitter {
     convert1DToPosition( index ) {
         let row = index % this.BOARD_SIZE
         let col = Math.floor( index / this.BOARD_SIZE )
-        return new Position( row, col )
+        return {
+            row:    row,
+            col:    col
+        }
     }
 }
 

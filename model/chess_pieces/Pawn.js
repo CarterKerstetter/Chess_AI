@@ -1,5 +1,4 @@
 import { Chess_Piece } from './Chess_Piece.js'
-import { Position } from './motion/Position.js'
 
 class Pawn extends Chess_Piece {
     constructor(piece_number, side) {
@@ -21,7 +20,10 @@ class Pawn extends Chess_Piece {
         let position_list = [ move.start_position ]
         // movement without capturing an enemy
         if( Math.abs( col_difference ) == 0 ) {
-            let position = new Position( move.start_position.row + forward, move.start_position.col )
+            let position = {
+                row:    move.start_position.row + forward,
+                col:    move.start_position.col
+            }
             position_list.push( position )
             // move one space forward
             if( Math.abs( row_difference ) == 1 ) {
